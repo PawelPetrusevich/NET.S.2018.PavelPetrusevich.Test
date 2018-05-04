@@ -5,6 +5,8 @@ using Task4;
 
 namespace Task4.Tests
 {
+    using Task4.Solution;
+
     [TestFixture]
     public class TestCalculator
     {
@@ -17,7 +19,7 @@ namespace Task4.Tests
 
             double expected = 8.3636363;
 
-            double actual = calculator.CalculateAverage(values, AveragingMethod.Mean);
+            double actual = calculator.CalculateAverage(values, CalculeteMethods.MeanMethods);
 
             Assert.AreEqual(expected, actual, 0.000001);
         }
@@ -29,7 +31,7 @@ namespace Task4.Tests
 
             double expected = 8.0;
 
-            double actual = calculator.CalculateAverage(values, AveragingMethod.Median);
+            double actual = calculator.CalculateAverage(values, CalculeteMethods.MedianMethods);
 
             Assert.AreEqual(expected, actual, 0.000001);
         }

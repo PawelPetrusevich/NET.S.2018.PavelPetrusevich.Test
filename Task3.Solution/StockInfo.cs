@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Task3
 {
-    public class StockInfo : EventArgs
+    public class StockInfoEventArgs : EventArgs
     {
         public int USD { get; set; }
         public int Euro { get; set; }

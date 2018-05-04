@@ -18,7 +18,7 @@ namespace Test6.Solution
 
     public class FunctionsClass<T> where T : IConvertible
     {
-        public static  T FirstSequenceFormula(T first,T second)
+        public static T FirstSequenceFormula(T first, T second)
         {
 
             return Add(first, second);
@@ -28,6 +28,13 @@ namespace Test6.Solution
         {
 
             var result = Add(second, Divide(first, second));
+            return result;
+        }
+
+        public static T SecondSequenceFormula(T first, T second)
+        {
+            // convert int->T ???
+            var result = WithOut(MultiPlay(6, second), MultiPlay(8, first));
             return result;
         }
 

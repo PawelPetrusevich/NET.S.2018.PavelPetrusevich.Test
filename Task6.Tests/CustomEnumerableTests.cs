@@ -8,15 +8,18 @@ using NUnit.Framework;
 
 namespace Task6.Tests
 {
+    using Test6.Solution;
+
     [TestFixture]
     public class CustomEnumerableTests
     {
         [Test]
         public void Generator_ForSequence1()
         {
-            int[] expected = {1, 1, 2, 3, 5, 8, 13, 21, 34, 55};
-
-            Assert.Inconclusive();
+            int[] expected = { 1, 1, 2, 3, 5, 8, 13, 21, 34, 55 };
+            SequenceCalculate<int> sequence = new SequenceCalculate<int>();
+            var result = sequence.ResultCalculate(10, 1, 1, FunctionsClass<int>.FirstSequenceFormula);
+            Assert.That(expected, Is.EqualTo(result));
         }
 
         [Test]
@@ -32,7 +35,9 @@ namespace Task6.Tests
         {
             double[] expected = { 1, 2, 2.5, 3.3, 4.05757575757576, 4.87086926018965, 5.70389834408211, 6.55785277425587, 7.42763417076325, 8.31053343902137 };
 
-            Assert.Inconclusive();
+            SequenceCalculate<double> sequence = new SequenceCalculate<double>();
+            var result = sequence.ResultCalculate(10, 1, 2, FunctionsClass<double>.ThirdsSequenceFormula);
+            Assert.That(expected, Is.EqualTo(result));
         }
     }
 }

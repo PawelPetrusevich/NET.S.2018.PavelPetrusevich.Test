@@ -1,19 +1,23 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright company="NET.S.2018.PavelPetrusevich.Test" file=" IConverter.cs">
+// <copyright company="NET.S.2018.PavelPetrusevich.Test" file=" IVisitor.cs">
 //  Creator name: 
 //  Solution: NET.S.2018.PavelPetrusevich.Test
 //  Project: Task5.Solution    
 // </copyright>
 // <summary>
-//  Filename: IConverter.cs
-//  Created day: 04.05.2018    12:46
+//  Filename: IVisitor.cs
+//  Created day: 07.05.2018    22:30
 //  </summary> 
 //  --------------------------------------------------------------------------------------------------------------------
 
-namespace Task5.Solution.Converters
+namespace Task5.Solution.Visitors
 {
-    interface IConverter
+    public interface IVisitor
     {
-        string Convert();
+        string VisitBoldText(BoldText boldText);
+
+        string VisitHyperLink(HyperLink hyperLink);
+
+        string VisitPlainText(PlainText plainText);
     }
 }

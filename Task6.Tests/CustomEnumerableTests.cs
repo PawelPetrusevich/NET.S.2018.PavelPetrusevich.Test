@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 
 namespace Task6.Tests
 {
@@ -26,8 +20,9 @@ namespace Task6.Tests
         public void Generator_ForSequence2()
         {
             int[] expected = { 1, 2, 4, 8, 16, 32, 64, 128, 256, 512 };
-
-            Assert.Inconclusive();
+            SequenceCalculate<int> sequence = new SequenceCalculate<int>();
+            var result = sequence.ResultCalculate(10, 1, 2, FunctionsClass<int>.SecondSequenceFormula);
+            Assert.That(expected, Is.EqualTo(result));
         }
 
         [Test]
@@ -37,7 +32,12 @@ namespace Task6.Tests
 
             SequenceCalculate<double> sequence = new SequenceCalculate<double>();
             var result = sequence.ResultCalculate(10, 1, 2, FunctionsClass<double>.ThirdsSequenceFormula);
-            Assert.That(expected, Is.EqualTo(result));
+            for (int i = 0; i < expected.Length; i++)
+            {
+                Assert.AreEqual(expected[i], result[i], 0.0001);
+            }
+
+            //Assert.That(expected, Is.EqualTo(result));
         }
     }
 }

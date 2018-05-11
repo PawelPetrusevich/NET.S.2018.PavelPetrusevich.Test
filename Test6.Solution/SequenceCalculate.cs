@@ -22,8 +22,11 @@ namespace Test6.Solution
         public List<T> ResultCalculate(int count, T first, T second, Func<T, T, T> calcFunction)
         {
             this.result.Add(first);
+
             this.result.Add(second);
+
             count -= 2;
+
             while (count > 0)
             {
                 var temp = this.Calculate(first, second, calcFunction);

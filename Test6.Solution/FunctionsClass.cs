@@ -33,45 +33,50 @@ namespace Test6.Solution
 
         public static T SecondSequenceFormula(T first, T second)
         {
-            // convert int->T ???
             var result = WithOut(MultiPlay(6, second), MultiPlay(8, first));
             return result;
         }
 
-        private static T Add(T first, T second)
+        private static T Add(dynamic first, dynamic second)
         {
-            ParameterExpression paramA = Expression.Parameter(typeof(T), "first");
-            ParameterExpression paramB = Expression.Parameter(typeof(T), "second");
+            ParameterExpression paramA = Expression.Parameter(first.GetType(), "first");
+            ParameterExpression paramB = Expression.Parameter(second.GetType(), "second");
             BinaryExpression body = Expression.Add(paramA, paramB);
             Func<T, T, T> add = Expression.Lambda<Func<T, T, T>>(body, paramA, paramB).Compile();
 
             return add(first, second);
         }
 
-        private static T WithOut(T first, T second)
+        private static T WithOut(dynamic first, dynamic second)
         {
-            ParameterExpression paramA = Expression.Parameter(typeof(T), "first");
-            ParameterExpression paramB = Expression.Parameter(typeof(T), "second");
+            ParameterExpression paramA = Expression.Parameter(first.GetType(), "first");
+            ParameterExpression paramB = Expression.Parameter(second.GetType(), "second");
             BinaryExpression body = Expression.Subtract(paramA, paramB);
             Func<T, T, T> withOut = Expression.Lambda<Func<T, T, T>>(body, paramA, paramB).Compile();
 
             return withOut(first, second);
         }
 
-        private static T MultiPlay(T first, T second)
+
+        private static T MultiPlay(dynamic first, dynamic second)
         {
-            ParameterExpression paramA = Expression.Parameter(typeof(T), "first");
-            ParameterExpression paramB = Expression.Parameter(typeof(T), "second");
+            if (first == null || second == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            ParameterExpression paramA = Expression.Parameter(first.GetType(), "first");
+            ParameterExpression paramB = Expression.Parameter(second.GetType(), "second");
             BinaryExpression body = Expression.Multiply(paramA, paramB);
             Func<T, T, T> multiply = Expression.Lambda<Func<T, T, T>>(body, paramA, paramB).Compile();
 
             return multiply(first, second);
         }
 
-        private static T Divide(T first, T second)
+        private static T Divide(dynamic first, dynamic second)
         {
-            ParameterExpression paramA = Expression.Parameter(typeof(T), "first");
-            ParameterExpression paramB = Expression.Parameter(typeof(T), "second");
+            ParameterExpression paramA = Expression.Parameter(first.GetType(), "first");
+            ParameterExpression paramB = Expression.Parameter(second.GetType(), "second");
             BinaryExpression body = Expression.Divide(paramA, paramB);
             Func<T, T, T> divide = Expression.Lambda<Func<T, T, T>>(body, paramA, paramB).Compile();
 

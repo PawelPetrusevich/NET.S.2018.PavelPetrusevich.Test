@@ -1,24 +1,24 @@
-﻿using System;
-using System.Linq;
-
-namespace Task1
+﻿namespace Task1.Solution
 {
+    using System;
     using System.Text;
-
-    using Task1.Solution;
 
     public class PasswordCheckerService
     {
-        private SqlRepository repository = new SqlRepository();
+        private readonly IRepository repository;
 
-        public Tuple<bool, string> VerifyPassword(string password, PasswordValidatorBuilder validator)
+        public PasswordCheckerService(IRepository repository)
         {
-            var passValidator = validator
-                .BuildValidator();
+            this.repository = repository;
+        }
+
+        public Tuple<bool, string> VerifyPassword(PasswordValidatorBuilder validator)
+        {
+            var passValidator = validator.IsValid();
 
             if (passValidator.Item1)
             {
-                this.repository.Create(password);
+                this.repository.Create(validator.Password);
 
                 return Tuple.Create(true, "Password is Ok. User was created");
             }

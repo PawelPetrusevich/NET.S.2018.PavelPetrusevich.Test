@@ -14,31 +14,24 @@ namespace Task1.Solution
 {
     using System;
     using System.Collections.Generic;
-    using System.IO;
     using System.Linq;
 
     public sealed class PasswordValidatorBuilder
     {
         private readonly List<string> ErrorList = new List<string>();
 
-        private readonly string password;
+        public string Password { get; }
 
-        public PasswordValidatorBuilder(string _password)
+        public PasswordValidatorBuilder(string password)
         {
-            if (_password == null)
-            {
-                throw new ArgumentNullException(nameof(_password));
-            }
-
-            this.password = _password;
+            this.Password = password;
         }
 
         public PasswordValidatorBuilder EmptyChecked()
         {
-
-            if (this.password == string.Empty)
+            if (this.Password == string.Empty)
             {
-                this.ErrorList.Add($"{password} is empty ");
+                this.ErrorList.Add($"{this.Password} is empty ");
             }
 
             return this;
@@ -46,17 +39,17 @@ namespace Task1.Solution
 
         public PasswordValidatorBuilder MinLengthCheck()
         {
-            if (password.Length <= 7)
-                this.ErrorList.Add( $"{password} length too short");
+            if (this.Password.Length <= 7)
+                this.ErrorList.Add( $"{this.Password} length too short");
 
             return this;
         }
 
         public PasswordValidatorBuilder MaxLengthCheck()
         {
-            if (this.password.Length >= 15)
+            if (this.Password.Length >= 15)
             {
-                this.ErrorList.Add($"{password} length too long");
+                this.ErrorList.Add($"{this.Password} length too long");
             }
 
             return this;
@@ -64,9 +57,9 @@ namespace Task1.Solution
 
         public PasswordValidatorBuilder LetterChek()
         {
-            if (!password.Any(char.IsLetter))
+            if (!this.Password.Any(char.IsLetter))
             {
-                this.ErrorList.Add($"{password} hasn't alphanumerical chars");
+                this.ErrorList.Add($"{this.Password} hasn't alphanumerical chars");
             }
 
             return this;
@@ -74,21 +67,20 @@ namespace Task1.Solution
 
         public PasswordValidatorBuilder DigitsCheck()
         {
-            if (!password.Any(char.IsNumber))
+            if (!this.Password.Any(char.IsNumber))
             {
-                this.ErrorList.Add( $"{password} hasn't digits");
+                this.ErrorList.Add($"{this.Password} hasn't digits");
             }
 
             return this;
         }
 
-        public Tuple<bool, List<string>> BuildValidator()
+        public Tuple<bool, List<string>> IsValid()
         {
             if (this.ErrorList.Count > 0)
             {
                 return Tuple.Create(false, this.ErrorList);
             }
-
             else
             {
                 this.ErrorList.Add("All OK");

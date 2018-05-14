@@ -25,8 +25,8 @@ namespace Task1.Solution.Tests
                 .EmptyChecked()
                 .MinLengthCheck()
                 .MaxLengthCheck();
-            PasswordCheckerService service = new PasswordCheckerService();
-            Assert.IsTrue(service.VerifyPassword(password,validator).Item1);
+            PasswordCheckerService service = new PasswordCheckerService(new SqlRepository());
+            Assert.IsTrue(service.VerifyPassword(validator).Item1);
         }
     }
 }

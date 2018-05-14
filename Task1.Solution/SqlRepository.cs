@@ -1,6 +1,6 @@
-﻿namespace Task1
+﻿namespace Task1.Solution
 {
-    public class SqlRepository
+    public class SqlRepository : IRepository
     {
         public void Create(string password) { }
     }

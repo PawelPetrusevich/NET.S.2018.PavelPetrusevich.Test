@@ -18,11 +18,12 @@ namespace Task3
 
         public void Update(object sender, StockInfoEventArgs info)
         {
-
-            if (info.USD > 30)
-                Console.WriteLine("Брокер {0} продает доллары;  Курс доллара: {1}", this.Name, info.USD);
-            else
-                Console.WriteLine("Брокер {0} покупает доллары;  Курс доллара: {1}", this.Name, info.USD);
+            Console.WriteLine(
+                info.USD > 30
+                    ? "Брокер {0} продает доллары;  Курс доллара: {1}"
+                    : "Брокер {0} покупает доллары;  Курс доллара: {1}",
+                this.Name,
+                info.USD);
         }
         
     }
